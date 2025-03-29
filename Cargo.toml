@@ -20,6 +20,7 @@ all-features = true
 default = ["connect", "handshake"]
 connect = ["stream", "tokio/net", "handshake"]
 handshake = ["tungstenite/handshake"]
+deflate = ["tungstenite/deflate"]
 native-tls = ["native-tls-crate", "tokio-native-tls", "stream", "tungstenite/native-tls", "handshake"]
 native-tls-vendored = ["native-tls", "native-tls-crate/vendored", "tungstenite/native-tls-vendored"]
 rustls-tls-native-roots = ["__rustls-tls", "rustls-native-certs"]
@@ -35,7 +36,8 @@ tokio = { version = "1.0.0", default-features = false, features = ["io-util"] }
 
 [dependencies.tungstenite]
 version = "0.26.2"
-path = "../tungstenite-rs"
+git = "https://github.com/keesverruijt/tungstenite-rs.git"
+branch = "permessage-deflate"
 default-features = false
 
 [dependencies.native-tls-crate]

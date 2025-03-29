@@ -214,6 +214,23 @@ impl<S> WebSocketStream<S> {
     }
 
     /// Convert a raw socket into a WebSocketStream without performing a
+    /// handshake, with extensions.
+    pub async fn from_raw_socket_with_extensions(
+        stream: S,
+        role: Role,
+        config: Option<WebSocketConfig>,
+        extensions: Option<tungstenite::extensions::Extensions>,
+    ) -> Self
+    where
+        S: AsyncRead + AsyncWrite + Unpin,
+    {
+        handshake::without_handshake(stream, move |allow_std| {
+            WebSocket::from_raw_socket_with_extensions(allow_std, role, config, extensions)
+        })
+        .await
+    }
+
+    /// Convert a raw socket into a WebSocketStream without performing a
     /// handshake.
     pub async fn from_partially_read(
         stream: S,

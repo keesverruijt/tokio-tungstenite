@@ -225,7 +225,11 @@ impl<S> WebSocketStream<S> {
         S: AsyncRead + AsyncWrite + Unpin,
     {
         handshake::without_handshake(stream, move |allow_std| {
-            WebSocket::from_raw_socket_with_extensions(allow_std, role, config, extensions)
+            if let Some(ext) = extensions {
+                WebSocket::from_raw_socket_with_extensions(allow_std, role, config, ext)
+            } else {
+                WebSocket::from_raw_socket(allow_std, role, config)
+            }
         })
         .await
     }

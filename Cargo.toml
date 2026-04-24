@@ -35,9 +35,9 @@ futures-util = { version = "0.3.28", default-features = false, features = ["sink
 tokio = { version = "1.0.0", default-features = false, features = ["io-util"] }
 
 [dependencies.tungstenite]
-version = "0.26.2"
-git = "https://github.com/keesverruijt/tungstenite-rs.git"
-tag = "v0.24.0-deflate"
+version = "0.27.0"
+git = "https://github.com/signalapp/tungstenite-rs.git"
+tag = "signal-v0.27.0"
 default-features = false
 
 [dependencies.native-tls-crate]
